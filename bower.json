@@ -1,0 +1,22 @@
+{
+  "name": "node-blog",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "wangxiaozhan <2457307263@qq.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.4.0",
+    "bootstrap": "3.3.1",
+    "font-awesome": "4.5.0"
+  }
+}

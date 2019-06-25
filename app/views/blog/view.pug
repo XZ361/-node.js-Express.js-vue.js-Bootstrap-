@@ -1,0 +1,47 @@
+extends ./layout.pug
+
+block content
+    h2.page-header.post-view-header= post.title
+    div.post.post-view
+        div.post-meta
+            span.post-created
+                i.fa.fa-clock-o &nbsp;
+                =moment(post.created).format('YYYY-MM-DD HH:mm:ss')
+            span.post-author
+                i.fa.fa-user &nbsp;
+                =post.author.name
+            span.post-category
+                i.fa.fa-calendar &nbsp;
+                a(href='/posts/category/' + post.category.name, target = '_blank')
+                    =post.category.name
+            span.post-comment
+                i.fa.fa-comment &nbsp;
+                =post.comments.length || 0
+            span.post-favorite
+                a(href='/posts/favorite/' + post._id)
+                    i.fa.fa-star &nbsp;
+                    =post.meta.favorite || 0
+        div.post-abstract
+            !=post.content
+        div.post-comments
+            h3 用户评论
+
+            div.post-comment-list
+                if post.comments.length
+                    each comment in post.comments
+                        div.post-comment-item
+                            h5.post-comment-email=comment.email
+                                small.pull-right= moment(comment.created).format('YYYY-MM-DD ')
+                            p.post-comment-content=comment.content
+                else
+                    p.alert.alert-info 还没有评论
+            form.post-comment-form(action="/posts/comment/"+post._id,
+            method="post", enctype="application/x-www-form-urlencoded")
+                h3 添加评论
+                div.form-group
+                    label(for="email") 邮箱
+                    input.form-control(type="text", name="email", placeholder="请输入邮箱...")
+                div.form-group
+                    label(for="content") 内容
+                    textarea.form-control(type="text", name="content", placeholder="请输入评论...")
+                button.btn.btn-primary 提交
